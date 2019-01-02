@@ -1,31 +1,33 @@
-def single_insert_or_delete(s1,s2):
+def single_insert_or_delete(s1, s2):
     s1 = s1.lower()
     s2 = s2.lower()
     if s1 == s2:
         return 0    
     if len(s1) > len(s2):
-        max = s1
-        min = s2
+        long = s1
+        short = s2
     else:
-        max = s2    
-        min = s1
-    if (len(max) - len(min)) != 1:
+        long = s2
+        short = s1
+    if (len(long) - len(short)) != 1:
         return 2    
-    max = list(max)
-    min = list(min)
-    for i in range(len(min)):
-        if max[i] != min[i]:
-            min.insert(i, max[i])
-            if max == min:
+    long = list(long)
+    short = list(short)
+    for i in range(len(short)):
+        if long[i] != short[i]:
+            short.insert(i, long[i])
+            if long == short:
                 return 1
             else:
                 return 2   
-    min.append(max[i+1])   
-    if max == min:
+    short.append(long[i+1])
+    if long == short:
         return 1
     else:
-        return 2 
-def find_mismatch(s1,s2):
+        return 2
+
+
+def find_mismatch(s1, s2):
         s1 = s1.lower()
         s2 = s2.lower()
         count = 0
@@ -36,21 +38,22 @@ def find_mismatch(s1,s2):
                 count += 1            
         if count == 0:
             return 0
-        elif count ==1 :
+        elif count == 1:
             return 1      
         else:
             return 2                   
 
-def spelling_corrector(s1,s2):
+
+def spelling_corrector(s1, s2):
     new_list = []
-    s1=s1.split()     
+    s1 = s1.split()
     for old_char in s1:
-        if len (old_char)<=2:
+        if len(old_char) <= 2:
             new_list.append(old_char)
             continue
         flag = False
         for new_char in s2:
-            result = find_mismatch(old_char,new_char)
+            result = find_mismatch(old_char, new_char)
             if result == 0:
                 new_list.append(old_char)
                 flag = True
@@ -65,7 +68,7 @@ def spelling_corrector(s1,s2):
                     new_list.append(new_char)
                     flag = True
                     break
-        if flag == False:            
+        if not flag:
             new_list.append(old_char)        
     sign = " "        
     new_str = sign.join(new_list) 
@@ -73,4 +76,4 @@ def spelling_corrector(s1,s2):
     return new_str
 
 
-print(spelling_corrector('programing is fan and eesy', ['programming','this','fun','easy','book' ]))    
+print(spelling_corrector('programing is fan and eesy', ['programming', 'this', 'fun', 'easy', 'book']))
